@@ -3,6 +3,9 @@
    ========================================= */
 
 'use strict';
+emailjs.init({
+    publicKey: "TpWtwhZOkvmXQqbbB"
+});
 
 // ─── TYPING ANIMATION ───────────────────────────────────────
 const typingStrings = [
@@ -225,22 +228,33 @@ form.addEventListener('submit', function (e) {
   if (!isValid) return;
 
   // Simulate sending
-  submitBtn.textContent = 'Sending…';
-  submitBtn.disabled = true;
-  submitBtn.style.opacity = '0.7';
+  submitBtn.textContent = 'Sending...';
+submitBtn.disabled = true;
 
-  setTimeout(() => {
+emailjs.sendForm(
+    "default_service",
+    "template_thj924q",
+    form
+)
+.then(() => {
     submitBtn.textContent = 'Send Message';
     submitBtn.disabled = false;
-    submitBtn.style.opacity = '1';
+
     form.reset();
     successEl.style.display = 'block';
 
-    // Hide success after 5 seconds
     setTimeout(() => {
-      successEl.style.display = 'none';
+        successEl.style.display = 'none';
     }, 5000);
-  }, 1500);
+})
+.catch((error) => {
+    console.error("EmailJS Error:", error);
+
+    submitBtn.textContent = 'Send Message';
+    submitBtn.disabled = false;
+
+    alert("EmailJS Error: " + JSON.stringify(error));
+});
 });
 
 // ─── SKILL CARD ENTRANCE STAGGER ────────────────────────────
