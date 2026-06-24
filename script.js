@@ -9,8 +9,8 @@ emailjs.init({
 
 // ─── TYPING ANIMATION ───────────────────────────────────────
 const typingStrings = [
-  'Data Analytics Student',
-  'Web Development Student',
+  'Data Analytics',
+  'Web Development',
   'Python & SQL Enthusiast',
   'Power BI Dashboard Creator',
 ];
